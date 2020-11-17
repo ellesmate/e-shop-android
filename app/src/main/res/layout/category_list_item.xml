@@ -25,6 +25,7 @@
                 app:srcCompat="@drawable/ic_launcher_background"/>
 
             <TextView
+                android:id="@+id/category_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@id/category_image"
@@ -33,7 +34,7 @@
                 android:layout_marginBottom="8dp"
                 android:gravity="center"
                 android:textAllCaps="true"
-                android:text="acoustic"
+                tools:text="acoustic"
                 android:textColor="@color/colorTextWhite" />
 
         </RelativeLayout>
