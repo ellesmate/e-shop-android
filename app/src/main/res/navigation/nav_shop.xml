@@ -11,4 +11,10 @@
         android:label="MainFragment"
         tools:layout="@layout/fragment_main" />
 
+    <fragment
+        android:id="@+id/product_detail_fragment"
+        android:name="com.example.eshop.ProductDetailFragment"
+        android:label="ProductDetailFragment"
+        tools:layout="@layout/fragment_product_detail" />
+
 </navigation>

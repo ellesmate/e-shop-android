@@ -52,15 +52,13 @@ class MainFragment : Fragment() {
         }
 
         binding.productRecyclerview.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
-        binding.productRecyclerview.addItemDecoration(GridItemDecoration(12, 6))
+        binding.productRecyclerview.addItemDecoration(GridItemDecoration(
+                resources.getDimensionPixelSize(R.dimen.productRowMargin),
+                resources.getDimensionPixelSize(R.dimen.productColumnsMargin)))
         binding.productRecyclerview.adapter = productAdapter
 
         categoryAdapter.submitList(categories)
         productAdapter.submitList(products)
-
-        view?.findNavController()?.addOnDestinationChangedListener { controller, destination, arguments ->
-
-        }
 
         onBackPressedCallback = object : OnBackPressedCallback(shown) {
             override fun handleOnBackPressed() {
@@ -84,11 +82,6 @@ class MainFragment : Fragment() {
 
         return binding.root
     }
-
-    private fun onBackButtonPressed() : Boolean {
-        return false
-    }
-
 
     private var shown = false
     private val interpolator = AccelerateDecelerateInterpolator()

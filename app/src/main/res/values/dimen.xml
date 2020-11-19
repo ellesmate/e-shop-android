@@ -7,4 +7,6 @@
     <dimen name="categoryImageHeight">150dp</dimen>
     <dimen name="cardCornerRadius">12dp</dimen>
     <dimen name="productListMarginTop">150dp</dimen>
+    <dimen name="productColumnsMargin">6dp</dimen>
+    <dimen name="productRowMargin">12dp</dimen>
 </resources>
