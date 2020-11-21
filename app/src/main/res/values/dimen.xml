@@ -9,4 +9,6 @@
     <dimen name="productListMarginTop">150dp</dimen>
     <dimen name="productColumnsMargin">6dp</dimen>
     <dimen name="productRowMargin">12dp</dimen>
+    <dimen name="personal_information_margin_vertical">8dp</dimen>
+    <dimen name="personal_information_margin_horizontal">8dp</dimen>
 </resources>

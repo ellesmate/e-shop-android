@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.eshop"
-        minSdkVersion 27
+        minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -84,5 +84,5 @@ dependencies {
 
     // Kapt
     // kapt "androidx.room:room-compiler:$room_version"
-    // kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+//     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 }
