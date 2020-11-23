@@ -28,8 +28,7 @@
             android:id="@+id/product_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/productListMarginTop"
-            android:paddingBottom="?attr/actionBarSize"
+            android:layout_marginTop="-28dp"
             android:orientation="vertical"
             android:background="@drawable/rounded_product_layout">
 
@@ -105,14 +104,25 @@
         </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation"
-            android:layout_gravity="bottom"
-            android:layout_width="match_parent"
+<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--            android:id="@+id/bottom_navigation"-->
+<!--            android:layout_gravity="bottom"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/rounded_bottom_navigation"-->
+<!--            style="@style/Widget.App.BottomNavigationView"-->
+<!--            app:menu="@menu/bottom_navigation_menu" />-->
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/cart_button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_bottom_navigation"
-            style="@style/Widget.App.BottomNavigationView"
-            app:menu="@menu/bottom_navigation_menu" />
+            android:layout_gravity="bottom|right"
+            android:layout_margin="16dp"
+            android:contentDescription="cart"
+            app:backgroundTint="@color/main_primary_dark"
+            app:tint="@color/main_on_primary_dark"
+            app:srcCompat="@drawable/shopping_cart"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

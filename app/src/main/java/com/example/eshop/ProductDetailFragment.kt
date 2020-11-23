@@ -11,7 +11,6 @@ import com.example.eshop.adapters.StockAdapter
 import com.example.eshop.databinding.FragmentProductDetailBinding
 import com.example.eshop.models.ProductDetail
 import com.example.eshop.models.Stock
-import com.squareup.picasso.Picasso
 
 class ProductDetailFragment : Fragment() {
 

@@ -17,4 +17,16 @@
         android:label="ProductDetailFragment"
         tools:layout="@layout/fragment_product_detail" />
 
+    <fragment
+        android:id="@+id/cart_fragment"
+        android:name="com.example.eshop.CartFragment"
+        android:label="CartFragment"
+        tools:layout="@layout/fragment_cart" />
+
+    <fragment
+        android:id="@+id/checkout_fragment"
+        android:name="com.example.eshop.CheckoutFragment"
+        android:label="CheckoutFragment"
+        tools:layout="@layout/fragment_checkout" />
+
 </navigation>

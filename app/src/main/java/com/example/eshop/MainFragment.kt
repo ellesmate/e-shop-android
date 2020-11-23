@@ -77,10 +77,24 @@ class MainFragment : Fragment() {
             }
         }
 
+        binding.cartButton.setOnClickListener {
+            it.findNavController().navigate(R.id.cart_fragment)
+        }
+
         defaultBottomPadding = binding.productList.paddingBottom
         action(binding, 0)
 
         return binding.root
+    }
+
+    override fun onPause() {
+        onBackPressedCallback.isEnabled = false
+        super.onPause()
+    }
+
+    override fun onResume() {
+        onBackPressedCallback.isEnabled = true
+        super.onResume()
     }
 
     private var shown = false

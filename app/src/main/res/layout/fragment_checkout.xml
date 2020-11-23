@@ -23,7 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="150dp"
+                android:layout_marginTop="400dp"
+                android:paddingBottom="128dp"
                 android:orientation="vertical">
 
                 <include layout="@layout/personal_information_layout" />

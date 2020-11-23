@@ -21,10 +21,12 @@
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/cart_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingTop="25dp"
                 android:paddingBottom="80dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="100"
                 tools:listitem="@layout/cart_list_item" />
 
@@ -105,6 +107,7 @@
             </RelativeLayout>
 
             <Button
+                android:id="@+id/checkout_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Checkout"
