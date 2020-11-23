@@ -13,13 +13,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        android:background="@color/colorPrimary">
+        android:background="?attr/colorPrimaryDark">
 
+<!--        <androidx.core.widget.NestedScrollView-->
+<!--            android:id="@+id/product_list"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginTop="-36dp"-->
+<!--            android:paddingBottom="?attr/actionBarSize"-->
+<!--            android:orientation="vertical"-->
+<!--            android:background="@drawable/rounded_product_layout">-->
+<!--            -->
         <androidx.core.widget.NestedScrollView
             android:id="@+id/product_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="-36dp"
+            android:layout_marginTop="@dimen/productListMarginTop"
             android:paddingBottom="?attr/actionBarSize"
             android:orientation="vertical"
             android:background="@drawable/rounded_product_layout">
@@ -41,7 +50,6 @@
                     android:layout_height="wrap_content"
                     android:textAllCaps="true"
                     android:text="Categories"
-                    android:textColor="@color/colorGrey"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View All"
-                    android:textColor="@color/black"
+                    style="@style/TextAppearance.Shop.TextInputLayout.HintText"
                     android:layout_marginEnd="@dimen/largePadding"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -79,7 +87,6 @@
                     android:layout_height="wrap_content"
                     android:textAllCaps="true"
                     android:text="Products"
-                    android:textColor="@color/colorGrey"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -104,6 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_bottom_navigation"
+            style="@style/Widget.App.BottomNavigationView"
             app:menu="@menu/bottom_navigation_menu" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

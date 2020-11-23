@@ -10,6 +10,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/main_primary_light"
         app:cardCornerRadius="18dp">
 
         <LinearLayout
@@ -21,7 +22,7 @@
                 android:id="@+id/product_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_launcher_background"
+                app:srcCompat="@drawable/guitar_1"
                 android:scaleType="fitXY"
                 android:adjustViewBounds="true" />
 

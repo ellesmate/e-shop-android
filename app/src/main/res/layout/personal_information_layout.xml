@@ -9,14 +9,21 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/colorPrimaryDark"
-        app:cardCornerRadius="20dp">
+        app:cardBackgroundColor="@color/main_primary_light"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.Shop.Section"
+                android:text="Shipping to" />
 
             <LinearLayout
                 android:layout_width="match_parent"

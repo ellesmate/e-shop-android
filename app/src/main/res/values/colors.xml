@@ -1,19 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="main_dark_200">#504B5F</color>
+    <color name="main_dark_500">#3D3A56</color>
+    <color name="main_dark_700">#312E43</color>
+    <color name="main_light">#F9F9F9</color>
+    <color name="main_accent_200">#DCC878</color>
+    <color name="main_accent_800">#AA9956</color>
+    <color name="black">#F9090909</color>
+    <color name="white">#F9F9F9F9</color>
+    <color name="main_primary">#EEEEEE</color>
+    <color name="main_primary_light">#F9F9F9</color>
+    <color name="main_primary_dark">#3D3A56</color>
+    <color name="main_on_primary">#3D3A56</color>
+    <color name="main_on_primary_dark">#DCC878</color>
+    <color name="main_accent">#504B5F</color>
+    <color name="main_text_input_outline">#3D3A56</color>
+    <color name="main_text_color_primary">#312E43</color>
 
-    <color name="colorPrimary">#f3b466</color>
-    <color name="colorPrimaryDark">#e2a050</color>
-    <color name="colorAccent">#e64a71</color>
+
+    <!--    <color name="pink_500">#FF6200EE</color>-->
+<!--    <color name="pink_700">#FF3700B3</color>-->
+<!--    <color name="teal_200">#FF03DAC5</color>-->
+<!--    <color name="teal_700">#FF018786</color>-->
+<!--    <color name="black">#FF000000</color>-->
+<!--    <color name="white">#FFFFFFFF</color>-->
+
+<!--    <color name="colorPrimary">#f3b466</color>-->
+<!--    <color name="colorPrimaryDark">#FF9800</color>-->
+<!--    <color name="colorAccent">#e64a71</color>-->
     <color name="colorWhite">#f9f9f9</color>
     <color name="colorTextWhite">#f9f9f9</color>
     <color name="colorGrey">#b4b4b4</color>
     <color name="colorBottomText">#744353</color>
     <color name="colorIcon">#848484</color>
+
+<!--    <color name="colorPrimary">#E0E0E0</color>-->
+<!--    <color name="colorPrimaryDark">#FBB8AC</color>-->
+<!--    <color name="colorAccent">#FEDBD0</color>-->
+<!--    <color name="textColorPrimary">#442C2E</color>-->
+<!--    <color name="toolbarIconColor">@color/textColorPrimary</color>-->
+    <color name="loginPageBackgroundColor">#FFFFFF</color>
+    <color name="productGridBackgroundColor">#FFFBFA</color>
+    <color name="textInputOutlineColor">#FBB8AC</color>
 </resources>

@@ -22,7 +22,7 @@
                 android:layout_width="@dimen/categoryImageWidth"
                 android:layout_height="@dimen/categoryImageHeight"
                 android:foreground="@drawable/trending_gradient_shape"
-                app:srcCompat="@drawable/ic_launcher_background"/>
+                app:srcCompat="@drawable/guitar_1"/>
 
             <TextView
                 android:id="@+id/category_text"
