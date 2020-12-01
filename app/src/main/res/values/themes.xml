@@ -48,8 +48,11 @@
     <style name="Widget.Shop.Button" parent="Widget.MaterialComponents.Button">
         <item name="android:textColor">?attr/colorOnPrimarySurface</item>
         <item name="backgroundTint">?attr/colorPrimaryDark</item>
-        <item name="android:background">@drawable/rounded_button</item>
         <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Widget.Shop.Button.Rounded" parent="Widget.Shop.Button">
+        <item name="android:background">@drawable/rounded_button</item>
     </style>
 
     <style name="Widget.Shop.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">

@@ -15,6 +15,87 @@
         android:fitsSystemWindows="true"
         android:background="?attr/colorPrimaryDark">
 
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/modal_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            android:clickable="true"
+            android:elevation="100dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#B0000000" />
+
+<!--            <fragment-->
+<!--                android:id="@+id/fragment_container"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:fragmentEnterTransition="@anim/slide_in_left"-->
+<!--                android:fragmentExitTransition="@anim/slide_in_left"-->
+<!--                android:layout_marginHorizontal="@dimen/mediumPadding"-->
+<!--                tools:layout="@layout/fragment_login"/>-->
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragment_container"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:paddingHorizontal="@dimen/mediumPadding"
+                android:layout_height="wrap_content"/>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/productListMarginTop"
+            android:paddingTop="@dimen/statusBar"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="@dimen/mediumPadding">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/change_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/colorPrimary"
+                    android:textAllCaps="true"
+                    android:textAppearance="?attr/textAppearanceCaption"
+                    android:layout_marginBottom="4dp"
+                    android:text="Change" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/colorPrimary"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:text="Kiryl Labada" />
+
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                app:cardCornerRadius="48dp"
+                app:cardBackgroundColor="?attr/colorPrimary">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/account_circle_24" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </RelativeLayout>
+
 <!--        <androidx.core.widget.NestedScrollView-->
 <!--            android:id="@+id/product_list"-->
 <!--            android:layout_width="match_parent"-->
@@ -31,6 +112,7 @@
             android:layout_marginTop="-28dp"
             android:orientation="vertical"
             android:background="@drawable/rounded_product_layout">
+<!--            android:layout_marginTop="-28dp"-->
 
         <LinearLayout
             android:layout_width="match_parent"

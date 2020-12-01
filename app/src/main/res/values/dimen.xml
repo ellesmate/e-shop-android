@@ -3,6 +3,7 @@
     <dimen name="cornerRadius">48dp</dimen>
     <dimen name="largePadding">32dp</dimen>
     <dimen name="mediumPadding">24dp</dimen>
+    <dimen name="smallPadding">12dp</dimen>
     <dimen name="categoryImageWidth">150dp</dimen>
     <dimen name="categoryImageHeight">150dp</dimen>
     <dimen name="cardCornerRadius">12dp</dimen>
@@ -11,4 +12,5 @@
     <dimen name="productRowMargin">12dp</dimen>
     <dimen name="personal_information_margin_vertical">8dp</dimen>
     <dimen name="personal_information_margin_horizontal">8dp</dimen>
+    <dimen name="statusBar">24dp</dimen>
 </resources>

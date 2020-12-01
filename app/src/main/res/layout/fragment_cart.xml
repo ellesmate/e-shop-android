@@ -32,54 +32,6 @@
 
         </LinearLayout>
 
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="80dp"-->
-<!--            android:layout_gravity="bottom"-->
-<!--            android:paddingHorizontal="30dp"-->
-<!--            android:gravity="center_vertical"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:background="@drawable/rounded_product_layout"-->
-<!--            android:backgroundTint="@color/main_primary_light">-->
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentStart="true"-->
-<!--                android:orientation="vertical">-->
-
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:textAppearance="?attr/textAppearanceBody1"-->
-<!--                    tools:text="Total:"/>-->
-
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:textAppearance="?attr/textAppearanceBody2"-->
-<!--                    android:textStyle="bold"-->
-<!--                    tools:text="$ 337.15"/>-->
-
-<!--            </LinearLayout>-->
-
-<!--            <Button-->
-<!--                android:id="@+id/outlinedButton"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentEnd="true"-->
-<!--                style="@style/Widget.Shop.Button"-->
-<!--                tools:text="Checkout"-->
-<!--                />-->
-
-<!--&lt;!&ndash;            <TextView&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:textAppearance="?attr/textAppearanceHeadline5"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_alignParentEnd="true"&ndash;&gt;-->
-<!--&lt;!&ndash;                tools:text="Checkout"/>&ndash;&gt;-->
-
-<!--        </RelativeLayout>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="128dp"
@@ -111,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Checkout"
-                style="@style/Widget.Shop.Button"/>
+                style="@style/Widget.Shop.Button.Rounded"/>
 
         </LinearLayout>
 

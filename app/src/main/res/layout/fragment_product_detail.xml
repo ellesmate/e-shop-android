@@ -178,7 +178,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Add to cart"
-                style="@style/Widget.Shop.Button"/>
+                style="@style/Widget.Shop.Button.Rounded"/>
 
         </LinearLayout>
 

@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.activity.OnBackPressedCallback
 import androidx.core.animation.doOnEnd
+import androidx.core.view.isVisible
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +26,7 @@ class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
     private lateinit var onBackPressedCallback: OnBackPressedCallback
+    private lateinit var loginFragment: LoginFragment
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +34,20 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMainBinding.inflate(inflater, container, false)
+        loginFragment = LoginFragment {
+            binding.modalLayout.isVisible = false
+        }
+        binding.changeButton.setOnClickListener {
+            binding.modalLayout.isVisible = true
+            parentFragmentManager.beginTransaction()
+                    .setCustomAnimations(
+                            R.anim.slide_in_right,
+                            R.anim.slide_out_left,
+                            R.anim.slide_in_left,
+                            R.anim.slide_out_right)
+                    .add(R.id.fragment_container, loginFragment)
+                    .commit()
+        }
 
         val categories = listOf(
             Category("acoustic", "https://e-shopdotnet.herokuapp.com/images/acoustic_category.jpg"),
