@@ -82,6 +82,9 @@ dependencies {
 
     implementation "com.squareup.picasso:picasso:$picasso_version"
 
+    // CookieJar
+    implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
+
     // Kapt
     // kapt "androidx.room:room-compiler:$room_version"
 //     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
