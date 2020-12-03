@@ -12,27 +12,45 @@ import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
+import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eshop.adapters.CategoryAdapter
 import com.example.eshop.adapters.ProductAdapter
+import com.example.eshop.api.NetworkService
 import com.example.eshop.databinding.FragmentMainBinding
-import com.example.eshop.models.Category
-import com.example.eshop.models.Product
+import com.example.eshop.viewmodels.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
-    private lateinit var onBackPressedCallback: OnBackPressedCallback
     private lateinit var loginFragment: LoginFragment
+
+    private lateinit var categoryAdapter: CategoryAdapter
+    private lateinit var productAdapter: ProductAdapter
+
+    private lateinit var viewModel: MainViewModel
+
+    private val productLayoutAnimation = ProductLayoutAnimation()
+    private val onBackPressedCallback: OnBackPressedCallback = object : OnBackPressedCallback(productLayoutAnimation.shown) {
+        override fun handleOnBackPressed() {
+            binding.productList.smoothScrollTo(0, 0)
+            productLayoutAnimation.action()
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel = MainViewModel(NetworkService.getInstance(requireContext()).productService)
         binding = FragmentMainBinding.inflate(inflater, container, false)
         loginFragment = LoginFragment {
             binding.modalLayout.isVisible = false
@@ -49,23 +67,17 @@ class MainFragment : Fragment() {
                     .commit()
         }
 
-        val categories = listOf(
-            Category("acoustic", "https://e-shopdotnet.herokuapp.com/images/acoustic_category.jpg"),
-            Category("electric", "https://e-shopdotnet.herokuapp.com/images/electric_category.jpg"),
-            Category("bass", "https://e-shopdotnet.herokuapp.com/images/bass_category.jpg")
-        )
-        val products = listOf(
-            Product("Naranda-GAG110CNA", "Naranda GAG110CNA", "https://e-shopdotnet.herokuapp.com/images/guitar_1.jpg", 182.0),
-            Product("MD SDG653", "MD SDG653", "https://e-shopdotnet.herokuapp.com/images/guitar_2.jpg", 454.54),
-            Product("Cort Sunset NY", "Cort Sunset NY", "https://e-shopdotnet.herokuapp.com/images/guitar_3.jpg", 915.20)
-        )
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
 
-        val categoryAdapter = CategoryAdapter()
-        val productAdapter = ProductAdapter()
+        productLayoutAnimation.defaultBottomPadding = binding.productList.paddingBottom
+        productLayoutAnimation.action(0)
+
+        categoryAdapter = CategoryAdapter()
+        productAdapter = ProductAdapter()
 
         binding.categoryRecyclerview.adapter = categoryAdapter
         binding.viewAllText.setOnClickListener {
-            action(binding)
+            productLayoutAnimation.action()
         }
 
         binding.productRecyclerview.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
@@ -74,23 +86,10 @@ class MainFragment : Fragment() {
                 resources.getDimensionPixelSize(R.dimen.productColumnsMargin)))
         binding.productRecyclerview.adapter = productAdapter
 
-        categoryAdapter.submitList(categories)
-        productAdapter.submitList(products)
-
-        onBackPressedCallback = object : OnBackPressedCallback(shown) {
-            override fun handleOnBackPressed() {
-                binding.productList.smoothScrollTo(0, 0);
-                action(binding)
-            }
-        }
-
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
-
         binding.productList.setOnScrollChangeListener { v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
-//            println("Old: $oldScrollY, new: $scrollY")
-            if (shown && oldScrollY < scrollY)
+            if (productLayoutAnimation.shown && oldScrollY < scrollY)
             {
-                action(binding)
+                productLayoutAnimation.action()
             }
         }
 
@@ -98,10 +97,33 @@ class MainFragment : Fragment() {
             it.findNavController().navigate(R.id.cart_fragment)
         }
 
-        defaultBottomPadding = binding.productList.paddingBottom
-        action(binding, 0)
+        subcribeUi()
 
         return binding.root
+    }
+
+    private fun subcribeUi() {
+        viewModel.categories.observe(viewLifecycleOwner) {
+            categoryAdapter.submitList(it)
+        }
+
+        viewModel.products.observe(viewLifecycleOwner) {
+            productAdapter.submitList(it)
+        }
+        viewModel.getProducts()
+
+        viewModel.snackBar.observe(viewLifecycleOwner) { message ->
+            message?.let {
+                Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
+                viewModel.onSnackbarShown()
+            }
+        }
+
+        viewModel.spinner.observe(viewLifecycleOwner) { value ->
+            value.let { show ->
+                binding.spinner.visibility = if (show) View.VISIBLE else View.GONE
+            }
+        }
     }
 
     override fun onPause() {
@@ -114,35 +136,35 @@ class MainFragment : Fragment() {
         super.onResume()
     }
 
-    private var shown = false
-    private val interpolator = AccelerateDecelerateInterpolator()
-    private var defaultBottomPadding = 0
+    inner class ProductLayoutAnimation() {
+        var shown = false
+        var defaultBottomPadding = 0
+        private val interpolator = AccelerateDecelerateInterpolator()
 
-    private fun action(binding: FragmentMainBinding, duration: Long = 500)
-    {
-        shown = !shown
-        onBackPressedCallback.isEnabled = !shown
-        val animatorSet = AnimatorSet()
-        animatorSet.removeAllListeners()
-        animatorSet.end()
-        animatorSet.cancel()
+        fun action(duration: Long = 500)
+        {
+            shown = !shown
+            onBackPressedCallback.isEnabled = !shown
+            val animatorSet = AnimatorSet()
+            animatorSet.removeAllListeners()
+            animatorSet.end()
+            animatorSet.cancel()
 
-        val translateY = context?.resources?.getDimensionPixelSize(R.dimen.productListMarginTop)!!
+            val translateY = requireContext().resources.getDimensionPixelSize(R.dimen.productListMarginTop)
 
-        if (!shown)
-            binding.productList.setPadding(0, 0, 0, defaultBottomPadding)
+            if (!shown)
+                binding.productList.setPadding(0, 0, 0, defaultBottomPadding)
 
-        val animator = ObjectAnimator.ofFloat(binding.productList, "translationY", (if (shown) translateY else 0).toFloat())
-        animator.duration = duration
-        if (interpolator != null) {
+            val animator = ObjectAnimator.ofFloat(binding.productList, "translationY", (if (shown) translateY else 0).toFloat())
+            animator.duration = duration
             animator.interpolator = interpolator
-        }
 
-        animatorSet.play(animator)
-        animator.start()
-        animator.doOnEnd {
-            if (shown)
-                binding.productList.setPadding(0, 0, 0, translateY + defaultBottomPadding)
+            animatorSet.play(animator)
+            animator.start()
+            animator.doOnEnd {
+                if (shown)
+                    binding.productList.setPadding(0, 0, 0, translateY + defaultBottomPadding)
+            }
         }
     }
 }

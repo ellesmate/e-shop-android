@@ -15,6 +15,13 @@
         android:fitsSystemWindows="true"
         android:background="?attr/colorPrimaryDark">
 
+        <ProgressBar
+            android:id="@+id/spinner"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/modal_layout"
             android:layout_width="match_parent"
@@ -123,7 +130,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:layout_marginStart="@dimen/largePadding">
+                android:layout_marginStart="@dimen/smallPadding">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/title_textView"
@@ -160,7 +167,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_marginTop="@dimen/largePadding"
-                android:layout_marginHorizontal="@dimen/largePadding">
+                android:layout_marginHorizontal="@dimen/smallPadding">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/title_textView2"

@@ -48,13 +48,13 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/next_button"
+                    android:id="@+id/login_button"
                     style="@style/Widget.Shop.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:text="Next" />
+                    android:text="Login" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/cancel_button"
@@ -63,8 +63,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="12dp"
                     android:layout_marginRight="12dp"
-                    android:layout_toStartOf="@id/next_button"
-                    android:layout_toLeftOf="@id/next_button"
+                    android:layout_toStartOf="@id/login_button"
+                    android:layout_toLeftOf="@id/login_button"
                     android:text="Cancel" />
 
             </RelativeLayout>

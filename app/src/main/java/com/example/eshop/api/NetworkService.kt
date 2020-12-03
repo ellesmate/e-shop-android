@@ -45,7 +45,7 @@ class NetworkService private constructor(private val context: Context) {
     }
 
     companion object {
-        const val BASE_URL = "https://e-shopdotnet.herokuapp.com/api"
+        const val BASE_URL = "https://e-shopdotnet.herokuapp.com/api/"
 
         @Volatile
         private var instance: NetworkService? = null
