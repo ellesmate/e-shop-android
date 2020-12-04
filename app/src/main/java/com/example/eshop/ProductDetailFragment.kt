@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.example.eshop.adapters.ImageAdapter
 import com.example.eshop.adapters.StockAdapter
@@ -14,9 +15,12 @@ import com.example.eshop.models.Stock
 
 class ProductDetailFragment : Fragment() {
 
+    private val args: ProductDetailFragmentArgs by navArgs()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentProductDetailBinding.inflate(inflater, container, false)
 
+        val slug = args.slug
         val product = ProductDetail(
                 "Naranda GAG110CNA",
                 "Количество струн: 6. Форма: джаз. Верхняя дека: ель. Нижняя дека и обечайка: махагонь. Накладка грифа: палисандр. Цвет верхней деки: натуральный. Покрытие: глянцевое. Механизм крепления струн: металлический держатель. Звукосниматели: 1 single. Элементы регулировки: звук и тон. Форма резонаторных отверстий: f-образная.",

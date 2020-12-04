@@ -41,10 +41,6 @@ class MainFragment : Fragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -94,15 +90,16 @@ class MainFragment : Fragment() {
         }
 
         binding.cartButton.setOnClickListener {
-            it.findNavController().navigate(R.id.cart_fragment)
+            val direction = MainFragmentDirections.actionMainFragmentToCartFragment()
+            it.findNavController().navigate(direction)
         }
 
-        subcribeUi()
+        subscribeUi()
 
         return binding.root
     }
 
-    private fun subcribeUi() {
+    private fun subscribeUi() {
         viewModel.categories.observe(viewLifecycleOwner) {
             categoryAdapter.submitList(it)
         }

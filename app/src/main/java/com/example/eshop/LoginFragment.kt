@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import com.example.eshop.api.NetworkService
 import com.example.eshop.databinding.FragmentLoginBinding
 import com.example.eshop.viewmodels.LoginViewModel
+import com.example.eshop.viewmodels.PasswordError
+import com.example.eshop.viewmodels.UsernameError
 
 class LoginFragment(val cancel: () -> Unit) : Fragment() {
 
@@ -18,12 +20,33 @@ class LoginFragment(val cancel: () -> Unit) : Fragment() {
         val binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         binding.loginButton.setOnClickListener {
-            viewModel.login("Admin", "password")
-            println("Clicked login.")
+            val login = binding.usernameEditText.text.toString()
+            val password = binding.passwordEditText.text.toString()
+
+            try {
+                viewModel.login(login, password)
+
+                binding.usernameEditText.text?.clear()
+                binding.passwordEditText.text?.clear()
+                binding.passwordTextInput.error = ""
+
+                closeFragment()
+            } catch (error: UsernameError) {
+                println(error.message)
+            } catch (error: PasswordError) {
+                binding.passwordTextInput.error = error.message
+            }
         }
 
         binding.cancelButton.setOnClickListener {
-            parentFragmentManager.beginTransaction()
+            closeFragment()
+        }
+
+        return binding.root
+    }
+
+    private fun closeFragment() {
+        parentFragmentManager.beginTransaction()
                 .setCustomAnimations(
                         R.anim.slide_in_right,
                         R.anim.slide_out_left,
@@ -32,9 +55,6 @@ class LoginFragment(val cancel: () -> Unit) : Fragment() {
                 .remove(this)
                 .commit()
 
-            this@LoginFragment.cancel()
-        }
-
-        return binding.root
+        this@LoginFragment.cancel()
     }
 }

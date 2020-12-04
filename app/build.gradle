@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -34,10 +37,17 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    sourceSets {
+        main {
+            java {
+                srcDirs += 'build/generated/source/navigation-args'
+            }
+        }
+    }
 }
 
 dependencies {
-
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.2.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -59,6 +69,10 @@ dependencies {
     def view_pager_version = '1.0.0'
     def material_version = '1.2.1'
     def picasso_version = '2.71828'
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_android_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_version"
 
     // network & serialization
     // implementation "com.google.code.gson:gson:$gson_version"
@@ -87,5 +101,5 @@ dependencies {
 
     // Kapt
     // kapt "androidx.room:room-compiler:$room_version"
-//     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 }

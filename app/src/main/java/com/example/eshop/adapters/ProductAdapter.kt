@@ -1,6 +1,7 @@
 package com.example.eshop.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.findViewTreeLifecycleOwner
@@ -8,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.eshop.MainFragmentDirections
 import com.example.eshop.R
 import com.example.eshop.databinding.ProductListItemBinding
 import com.example.eshop.models.Product
@@ -37,6 +39,11 @@ class ProductAdapter :
     class ListViewHolder (
         val binding: ProductListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+
+        private fun navigateToProduct(view: View, slug: String) {
+            val direction = MainFragmentDirections.actionMainFragmentToProductDetailFragment(slug)
+            view.findNavController().navigate(direction)
+        }
 
         fun bind(item: Product) {
             binding.productName.text = item.name
