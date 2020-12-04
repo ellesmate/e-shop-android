@@ -42,7 +42,9 @@ class CartAdapter :
                 cartItemPrice.text = item.value
                 cartItemQty.text = "x ${item.qty}"
 
-                Picasso.get().load(item.images.first()).into(cartItemImage)
+                val base_url = "https://e-shopdotnet.herokuapp.com"
+
+                Picasso.get().load(base_url + item.images.first()).into(cartItemImage)
             }
         }
     }

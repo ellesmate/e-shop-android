@@ -5,75 +5,78 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.example.eshop.adapters.ImageAdapter
 import com.example.eshop.adapters.StockAdapter
+import com.example.eshop.api.NetworkService
 import com.example.eshop.databinding.FragmentProductDetailBinding
-import com.example.eshop.models.ProductDetail
-import com.example.eshop.models.Stock
+import com.example.eshop.viewmodels.ProductDetailViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class ProductDetailFragment : Fragment() {
 
     private val args: ProductDetailFragmentArgs by navArgs()
 
+    private lateinit var viewModel: ProductDetailViewModel
+    private lateinit var binding: FragmentProductDetailBinding
+
+    private lateinit var stockAdapter: StockAdapter
+    private lateinit var imageAdapter: ImageAdapter
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = FragmentProductDetailBinding.inflate(inflater, container, false)
+        val network = NetworkService.getInstance(requireContext())
+        viewModel = ProductDetailViewModel(network.productService, network.cartService)
+        binding = FragmentProductDetailBinding.inflate(inflater, container, false)
 
-        val slug = args.slug
-        val product = ProductDetail(
-                "Naranda GAG110CNA",
-                "Количество струн: 6. Форма: джаз. Верхняя дека: ель. Нижняя дека и обечайка: махагонь. Накладка грифа: палисандр. Цвет верхней деки: натуральный. Покрытие: глянцевое. Механизм крепления струн: металлический держатель. Звукосниматели: 1 single. Элементы регулировки: звук и тон. Форма резонаторных отверстий: f-образная.",
-                "naranda-gag110cna",
-                "$ 182.00",
-                listOf(
-                        "https://e-shopdotnet.herokuapp.com/images/guitar_1.jpg",
-                        "https://e-shopdotnet.herokuapp.com/images/guitar_2.jpg"
-                ),
-                listOf(
-                        Stock(1, "Default", 100),
-                        Stock(5, "Green", 100)
-                )
-        )
+        stockAdapter = StockAdapter()
+        imageAdapter = ImageAdapter()
 
-        val stockAdapter = StockAdapter()
-        val imageAdapter = ImageAdapter()
+        LinearSnapHelper().attachToRecyclerView(binding.imageCarousel)
 
         binding.apply {
-            productName.text = product.name
-            productDescription.text = product.description
-            productPrice.text = product.price
             productStocks.adapter = stockAdapter
-
-            LinearSnapHelper().attachToRecyclerView(imageCarousel)
             imageCarousel.adapter = imageAdapter
-        }
 
-        stockAdapter.submitList(product.stocks)
-        imageAdapter.submitList(product.images)
+            productPlusOne.setOnClickListener { viewModel.plusOne() }
+            productMinusOne.setOnClickListener { viewModel.minusOne() }
+
+            addToCart.setOnClickListener { viewModel.addToCart() }
+        }
 
         return binding.root
     }
-}
 
-//CarouselView carouselView;
-//
-//int[] sampleImages = {R.drawable.image_1, R.drawable.image_2, R.drawable.image_3, R.drawable.image_4, R.drawable.image_5};
-//
-//@Override
-//protected void onCreate(Bundle savedInstanceState) {
-//    super.onCreate(savedInstanceState);
-//    setContentView(R.layout.activity_sample_carousel_view);
-//
-//    carouselView = (CarouselView) findViewById(R.id.carouselView);
-//    carouselView.setPageCount(sampleImages.length);
-//
-//    carouselView.setImageListener(imageListener);
-//}
-//
-//ImageListener imageListener = new ImageListener() {
-//    @Override
-//    public void setImageForPosition(int position, ImageView imageView) {
-//        imageView.setImageResource(sampleImages[position]);
-//    }
-//};
+    private fun subscribeUi() {
+        viewModel.product.observe(viewLifecycleOwner) { product ->
+            binding.apply {
+                productName.text = product.name
+                productDescription.text = product.description
+
+                val priceNumber = viewModel.priceToNumber(product.price)
+                productPrice.text =  viewModel.numberToPrice(priceNumber * viewModel.qty.value!!)
+            }
+
+            imageAdapter.submitList(product.images)
+            stockAdapter.submitList(product.stocks)
+        }
+
+        viewModel.snackBar.observe(viewLifecycleOwner) { message ->
+            message?.let {
+                Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
+                viewModel.onSnackbarShown()
+            }
+        }
+
+        viewModel.qty.observe(viewLifecycleOwner) {qty ->
+            binding.productQty.text = qty.toString()
+            viewModel.product.value?.let {
+                val priceNumber = viewModel.priceToNumber(it.price)
+                binding.productPrice.text = viewModel.numberToPrice(priceNumber * qty)
+            }
+        }
+
+        viewModel.fetchProduct(args.slug)
+    }
+}
