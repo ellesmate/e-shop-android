@@ -1,3 +1,14 @@
 package com.example.eshop.models
 
-data class Stock(val id: Int, val description: String, val qty: Int)
+import com.google.gson.annotations.SerializedName
+
+data class Stock(
+    @SerializedName("id")
+    val id: Int,
+
+    @SerializedName("description")
+    val description: String,
+
+    @SerializedName("qty")
+    val qty: Int
+)

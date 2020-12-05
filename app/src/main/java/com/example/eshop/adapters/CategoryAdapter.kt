@@ -39,10 +39,9 @@ class CategoryAdapter :
         fun bind(item: Category) {
             binding.categoryText.text = item.name
 
-            val base_url = "https://e-shopdotnet.herokuapp.com"
 
             Picasso.get()
-                .load(base_url + item.image)
+                .load(item.image)
                 .into(binding.categoryImage)
         }
     }

@@ -39,7 +39,7 @@ class ImageAdapter :
 
             Picasso.get()
                 .load(base_url + image)
-                .placeholder(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.guitar_1)
                 .into(binding.image)
         }
     }

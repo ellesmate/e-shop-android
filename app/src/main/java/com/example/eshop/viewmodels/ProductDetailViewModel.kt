@@ -11,6 +11,7 @@ import com.example.eshop.services.ProductService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.NumberFormat
 
 class ProductDetailViewModel(
     private val productService: ProductService,
@@ -43,6 +44,7 @@ class ProductDetailViewModel(
                 val data = productService.getProduct(slug)
 
                 withContext(Dispatchers.Main) {
+                    println(data)
                     _product.postValue(data)
                     currentStock.postValue(data.stocks.first())
                 }
@@ -60,16 +62,16 @@ class ProductDetailViewModel(
 
     fun minusOne() {
         _qty.value?.let {prev ->
-            if (prev == 1) {
+            if (prev != 1) {
                 _qty.postValue(prev - 1)
             }
         }
     }
 
-    fun addToCart() {
+    fun addToCart(onSuccess: () -> Unit, onError: () -> Unit) {
         val qty = _qty.value
 
-        if (qty != null && qty > 1) {
+        if (qty != null && qty < 1) {
             return
         }
 
@@ -77,15 +79,18 @@ class ProductDetailViewModel(
             viewModelScope.launch(Dispatchers.IO) {
                 try {
                     cartService.addToCart(stock.id, qty!!)
+                    onSuccess()
                 } catch (error: Throwable) {
-
+                    _snackBar.postValue(error.message)
+                    onError()
                 }
             }
         }
     }
 
     fun priceToNumber(price: String): Double {
-        return price.trimStart('$', ' ').toDouble()
+        val nf = NumberFormat.getInstance()
+        return nf.parse(price.trimStart('$', ' '))?.toDouble() ?: throw NullPointerException()
     }
 
     fun numberToPrice(price: Double): String = "$ %.2f".format(price)

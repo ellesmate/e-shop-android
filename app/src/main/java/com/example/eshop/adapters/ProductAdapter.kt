@@ -55,7 +55,7 @@ class ProductAdapter :
                 .into(binding.productImage)
 
             binding.root.setOnClickListener {
-                it.findNavController().navigate(R.id.product_detail_fragment)
+                navigateToProduct(it, item.slug)
             }
         }
     }

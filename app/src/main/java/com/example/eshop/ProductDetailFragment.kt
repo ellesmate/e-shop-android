@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.example.eshop.adapters.ImageAdapter
@@ -42,8 +43,15 @@ class ProductDetailFragment : Fragment() {
             productPlusOne.setOnClickListener { viewModel.plusOne() }
             productMinusOne.setOnClickListener { viewModel.minusOne() }
 
-            addToCart.setOnClickListener { viewModel.addToCart() }
+            addToCart.setOnClickListener {
+                viewModel.addToCart(
+                    { it.findNavController().navigateUp() },
+                    {}
+                )
+            }
         }
+
+        subscribeUi()
 
         return binding.root
     }
@@ -77,6 +85,7 @@ class ProductDetailFragment : Fragment() {
             }
         }
 
-        viewModel.fetchProduct(args.slug)
+        val slug = args.slug
+        viewModel.fetchProduct(slug)
     }
 }
