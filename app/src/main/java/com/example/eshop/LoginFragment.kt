@@ -5,18 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.eshop.api.NetworkService
+import androidx.fragment.app.viewModels
 import com.example.eshop.databinding.FragmentLoginBinding
+import com.example.eshop.utilities.InjectorUtils
 import com.example.eshop.viewmodels.LoginViewModel
 import com.example.eshop.viewmodels.PasswordError
 import com.example.eshop.viewmodels.UsernameError
 
 class LoginFragment : Fragment() {
 
-    private lateinit var viewModel: LoginViewModel
+    private val viewModel: LoginViewModel by viewModels {
+        InjectorUtils.provideLoginViewModelFactory(requireContext())
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        viewModel = LoginViewModel(NetworkService.getInstance(requireContext()).loginService)
         val binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         binding.loginButton.setOnClickListener {

@@ -9,29 +9,29 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.activity.OnBackPressedCallback
 import androidx.core.animation.doOnEnd
-import androidx.core.view.isVisible
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eshop.adapters.CategoryAdapter
 import com.example.eshop.adapters.ProductAdapter
-import com.example.eshop.api.NetworkService
 import com.example.eshop.databinding.FragmentMainBinding
+import com.example.eshop.utilities.InjectorUtils
 import com.example.eshop.viewmodels.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class MainFragment : Fragment() {
+    private val viewModel: MainViewModel by viewModels {
+        InjectorUtils.provideMainViewModelFactory(requireContext())
+    }
 
     private lateinit var binding: FragmentMainBinding
     private lateinit var loginFragment: LoginFragment
-
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var productAdapter: ProductAdapter
-
-    private lateinit var viewModel: MainViewModel
 
     private val productLayoutAnimation = ProductLayoutAnimation()
     private val onBackPressedCallback: OnBackPressedCallback = object : OnBackPressedCallback(productLayoutAnimation.shown) {
@@ -46,7 +46,6 @@ class MainFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = MainViewModel(NetworkService.getInstance(requireContext()).productService)
         binding = FragmentMainBinding.inflate(inflater, container, false)
         loginFragment = LoginFragment()
         binding.changeButton.setOnClickListener {

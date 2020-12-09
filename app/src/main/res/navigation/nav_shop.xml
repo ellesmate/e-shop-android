@@ -56,6 +56,11 @@
         android:id="@+id/checkout_fragment"
         android:name="com.example.eshop.CheckoutFragment"
         android:label="CheckoutFragment"
-        tools:layout="@layout/fragment_checkout" />
+        tools:layout="@layout/fragment_checkout">
+
+        <argument
+            android:name="total"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

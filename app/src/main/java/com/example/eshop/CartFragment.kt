@@ -5,24 +5,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import com.example.eshop.adapters.CartAdapter
-import com.example.eshop.api.NetworkService
 import com.example.eshop.databinding.FragmentCartBinding
-import com.example.eshop.models.CartItem
+import com.example.eshop.utilities.InjectorUtils
 import com.example.eshop.viewmodels.CartViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class CartFragment : Fragment() {
+    private val viewModel: CartViewModel by viewModels {
+        InjectorUtils.provideCartViewModelFactory(requireContext())
+    }
 
     private lateinit var binding: FragmentCartBinding
-    private lateinit var viewModel: CartViewModel
     private lateinit var cartAdapter: CartAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentCartBinding.inflate(inflater, container, false)
-        viewModel = CartViewModel(NetworkService.getInstance(requireContext()).cartService)
 
 //        val cart = listOf(
 //                CartItem(1, "Naranda GAG110CNA", "Default", "$182.00", 182.0, listOf("https://e-shopdotnet.herokuapp.com/images/guitar_1.jpg", "https://e-shopdotnet.herokuapp.com/images/guitar_2.jpg"), 12),
@@ -38,8 +39,10 @@ class CartFragment : Fragment() {
         binding.cartRecyclerView.adapter = cartAdapter
 
         binding.checkoutButton.setOnClickListener {
-            val direction = CartFragmentDirections.actionCartFragmentToCheckoutFragment()
-            it.findNavController().navigate(direction)
+            viewModel.total.value?.let {total ->
+                val direction = CartFragmentDirections.actionCartFragmentToCheckoutFragment("$ %.2f".format(total))
+                it.findNavController().navigate(direction)
+            }
         }
 
         subscribeUi()

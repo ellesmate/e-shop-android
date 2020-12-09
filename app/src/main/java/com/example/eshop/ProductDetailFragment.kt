@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
@@ -13,22 +14,22 @@ import com.example.eshop.adapters.ImageAdapter
 import com.example.eshop.adapters.StockAdapter
 import com.example.eshop.api.NetworkService
 import com.example.eshop.databinding.FragmentProductDetailBinding
+import com.example.eshop.utilities.InjectorUtils
 import com.example.eshop.viewmodels.ProductDetailViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class ProductDetailFragment : Fragment() {
 
     private val args: ProductDetailFragmentArgs by navArgs()
-
-    private lateinit var viewModel: ProductDetailViewModel
+    private val viewModel: ProductDetailViewModel by viewModels {
+        InjectorUtils.provideProductDetailViewModelFactory(requireContext())
+    }
     private lateinit var binding: FragmentProductDetailBinding
 
     private lateinit var stockAdapter: StockAdapter
     private lateinit var imageAdapter: ImageAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val network = NetworkService.getInstance(requireContext())
-        viewModel = ProductDetailViewModel(network.productService, network.cartService)
         binding = FragmentProductDetailBinding.inflate(inflater, container, false)
 
         stockAdapter = StockAdapter()

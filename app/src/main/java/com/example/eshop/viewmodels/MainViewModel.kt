@@ -41,6 +41,10 @@ class MainViewModel(
     }
 
     fun getProducts() {
+        if (_products.value != null) {
+            return
+        }
+
         launchDataLoad {
             withContext(Dispatchers.IO) {
                 val data = try {

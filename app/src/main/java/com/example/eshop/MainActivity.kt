@@ -7,17 +7,11 @@ import android.view.View
 import android.view.WindowManager
 import com.example.eshop.databinding.ActivityMainBinding
 import androidx.databinding.DataBindingUtil.setContentView
-import com.stripe.android.PaymentConfiguration
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-
-        PaymentConfiguration.init(
-                applicationContext,
-                "pk_test_key"
-        )
 
         this.window.apply {
 //            clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
