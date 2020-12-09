@@ -23,17 +23,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="400dp"
+                android:layout_marginTop="48dp"
                 android:paddingBottom="128dp"
                 android:orientation="vertical">
 
-                <include layout="@layout/personal_information_layout" />
+                <include
+                    android:id="@+id/personal_information"
+                    layout="@layout/personal_information_layout" />
 
-                <include layout="@layout/payment_method_layout"
+                <include
+                    android:id="@+id/payment_information"
+                    layout="@layout/payment_method_layout"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:layout_marginTop="20dp" />
-
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
@@ -71,6 +74,7 @@
             </RelativeLayout>
 
             <Button
+                android:id="@+id/payment_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Payment"

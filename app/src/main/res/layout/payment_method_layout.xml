@@ -13,6 +13,7 @@
         app:cardElevation="0dp">
 
         <LinearLayout
+            android:id="@+id/payment_info_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -28,9 +29,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="Card number">
+                android:hint="CARD NUMBER">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.stripe.android.view.CardNumberEditText
+                    android:id="@+id/card_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
@@ -48,10 +50,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:paddingRight="@dimen/personal_information_margin_horizontal"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:hint="CVV">
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.stripe.android.view.CvcEditText
+                        android:id="@+id/cvc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         />
@@ -66,14 +68,13 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:hint="EXPIRED DATE">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.stripe.android.view.ExpiryDateEditText
+                        android:id="@+id/expiry_date"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        />
+                        android:layout_height="wrap_content" />
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
-
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>

@@ -11,7 +11,7 @@ import com.example.eshop.viewmodels.LoginViewModel
 import com.example.eshop.viewmodels.PasswordError
 import com.example.eshop.viewmodels.UsernameError
 
-class LoginFragment(val cancel: () -> Unit) : Fragment() {
+class LoginFragment : Fragment() {
 
     private lateinit var viewModel: LoginViewModel
 
@@ -30,31 +30,26 @@ class LoginFragment(val cancel: () -> Unit) : Fragment() {
                 binding.passwordEditText.text?.clear()
                 binding.passwordTextInput.error = ""
 
-                closeFragment()
+                hide()
             } catch (error: UsernameError) {
                 println(error.message)
             } catch (error: PasswordError) {
                 binding.passwordTextInput.error = error.message
+            } catch (cause: Throwable) {
+                binding.passwordTextInput.error = cause.message
             }
         }
 
         binding.cancelButton.setOnClickListener {
-            closeFragment()
+            hide()
         }
 
         return binding.root
     }
 
-    private fun closeFragment() {
+    private fun hide() {
         parentFragmentManager.beginTransaction()
-                .setCustomAnimations(
-                        R.anim.slide_in_right,
-                        R.anim.slide_out_left,
-                        R.anim.slide_in_left,
-                        R.anim.slide_out_right)
                 .remove(this)
                 .commit()
-
-        this@LoginFragment.cancel()
     }
 }

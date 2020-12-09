@@ -22,27 +22,29 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:id="@+id/modal_layout"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="invisible"
-            android:clickable="true"
-            android:elevation="100dp">
+            android:elevation="100dp"
+            />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#B0000000" />
+<!--        <androidx.coordinatorlayout.widget.CoordinatorLayout-->
+<!--            android:id="@+id/modal_layout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:visibility="invisible"-->
+<!--            android:clickable="true"-->
+<!--            android:elevation="100dp">-->
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragment_container"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center"
-                android:paddingHorizontal="@dimen/mediumPadding"
-                android:layout_height="wrap_content"/>
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="#B0000000" />-->
 
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+<!--            -->
+
+<!--        </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
 
         <RelativeLayout
             android:layout_width="match_parent"

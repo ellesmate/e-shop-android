@@ -3,6 +3,7 @@ package com.example.eshop.api
 import android.content.Context
 import com.example.eshop.services.CartService
 import com.example.eshop.services.LoginService
+import com.example.eshop.services.PaymentService
 import com.example.eshop.services.ProductService
 import com.franmontiel.persistentcookiejar.ClearableCookieJar
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
@@ -42,6 +43,11 @@ class NetworkService private constructor(private val context: Context) {
     val cartService: CartService by lazy {
         builder.build()
             .create(CartService::class.java)
+    }
+
+    val paymentService: PaymentService by lazy {
+        builder.build()
+            .create(PaymentService::class.java)
     }
 
     companion object {

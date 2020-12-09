@@ -48,17 +48,9 @@ class MainFragment : Fragment() {
     ): View? {
         viewModel = MainViewModel(NetworkService.getInstance(requireContext()).productService)
         binding = FragmentMainBinding.inflate(inflater, container, false)
-        loginFragment = LoginFragment {
-            binding.modalLayout.isVisible = false
-        }
+        loginFragment = LoginFragment()
         binding.changeButton.setOnClickListener {
-            binding.modalLayout.isVisible = true
             parentFragmentManager.beginTransaction()
-                    .setCustomAnimations(
-                            R.anim.slide_in_right,
-                            R.anim.slide_out_left,
-                            R.anim.slide_in_left,
-                            R.anim.slide_out_right)
                     .add(R.id.fragment_container, loginFragment)
                     .commit()
         }

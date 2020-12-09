@@ -99,6 +99,9 @@ dependencies {
     // CookieJar
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
 
+    // Stripe
+    implementation 'com.stripe:stripe-android:16.1.1'
+
     // Kapt
     // kapt "androidx.room:room-compiler:$room_version"
      kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
