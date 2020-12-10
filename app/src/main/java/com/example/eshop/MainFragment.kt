@@ -47,7 +47,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMainBinding.inflate(inflater, container, false)
-        loginFragment = LoginFragment()
+        loginFragment = LoginFragment(viewModel::getMe)
         binding.changeButton.setOnClickListener {
             parentFragmentManager.beginTransaction()
                     .add(R.id.fragment_container, loginFragment)
@@ -59,7 +59,7 @@ class MainFragment : Fragment() {
         productLayoutAnimation.defaultBottomPadding = binding.productList.paddingBottom
         productLayoutAnimation.action(0)
 
-        categoryAdapter = CategoryAdapter()
+        categoryAdapter = CategoryAdapter(::categoryClick)
         productAdapter = ProductAdapter()
 
         binding.categoryRecyclerview.adapter = categoryAdapter
@@ -90,7 +90,26 @@ class MainFragment : Fragment() {
         return binding.root
     }
 
+    private fun categoryClick(category: String) : Boolean {
+        if (viewModel.category.value == null) {
+            viewModel.category.postValue(category)
+            return true
+        }
+
+        viewModel.category.value?.let {
+            if (it != category) {
+                viewModel.category.postValue(category)
+                return true
+            }
+        }
+
+        viewModel.category.postValue(null)
+        return false
+    }
+
     private fun subscribeUi() {
+        viewModel.getMe()
+
         viewModel.categories.observe(viewLifecycleOwner) {
             categoryAdapter.submitList(it)
         }
@@ -98,12 +117,27 @@ class MainFragment : Fragment() {
         viewModel.products.observe(viewLifecycleOwner) {
             productAdapter.submitList(it)
         }
-        viewModel.getProducts()
+
+        viewModel.me.observe(viewLifecycleOwner) {
+            it?.let {
+                binding.username.text = it
+            }
+        }
 
         viewModel.snackBar.observe(viewLifecycleOwner) { message ->
             message?.let {
                 Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
                 viewModel.onSnackbarShown()
+            }
+        }
+
+        viewModel.category.observe(viewLifecycleOwner) {
+            if (it == null) {
+                viewModel.getProducts()
+            }
+
+            it?.let {
+                viewModel.getProductsByCategory(it)
             }
         }
 

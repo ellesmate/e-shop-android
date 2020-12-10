@@ -6,16 +6,21 @@ import com.example.eshop.models.Credentials
 import com.example.eshop.services.LoginService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LoginViewModel(private val loginService: LoginService) : ViewModel() {
 
-    fun login(username: String, password: String) {
+    fun login(username: String, password: String, onSuccess: () -> Unit) {
         val credentials = Credentials(username, password)
         validate(credentials)
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 loginService.login(Credentials(username, password))
+
+                withContext(Dispatchers.Main) {
+                    onSuccess()
+                }
             } catch (cause: Throwable) {
                 println("error: ${cause.message}.")
             }

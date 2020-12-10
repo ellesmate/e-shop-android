@@ -121,5 +121,6 @@ class CheckoutFragment : Fragment() {
         val controller = requireView().findNavController()
         controller.navigateUp()
         controller.navigateUp()
+        controller.navigate(R.id.payment_successful_fragment)
     }
 }

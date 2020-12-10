@@ -12,7 +12,7 @@ import com.example.eshop.viewmodels.LoginViewModel
 import com.example.eshop.viewmodels.PasswordError
 import com.example.eshop.viewmodels.UsernameError
 
-class LoginFragment : Fragment() {
+class LoginFragment(private val onSuccess: () -> Unit) : Fragment() {
 
     private val viewModel: LoginViewModel by viewModels {
         InjectorUtils.provideLoginViewModelFactory(requireContext())
@@ -26,13 +26,14 @@ class LoginFragment : Fragment() {
             val password = binding.passwordEditText.text.toString()
 
             try {
-                viewModel.login(login, password)
+                viewModel.login(login, password) {
+                    binding.usernameEditText.text?.clear()
+                    binding.passwordEditText.text?.clear()
+                    binding.passwordTextInput.error = ""
 
-                binding.usernameEditText.text?.clear()
-                binding.passwordEditText.text?.clear()
-                binding.passwordTextInput.error = ""
-
-                hide()
+                    hide()
+                    onSuccess()
+                }
             } catch (error: UsernameError) {
                 println(error.message)
             } catch (error: PasswordError) {

@@ -51,7 +51,7 @@ class CartAdapter(
                 removeOneBtn.setOnClickListener {
                     if (item.qty == 1) {
                         // Ask to delete
-                        MaterialAlertDialogBuilder(context)
+                        MaterialAlertDialogBuilder(context, R.style.MaterialAlertDialog_Shop)
                                 .setMessage("Remove item?")
                                 .setPositiveButton("Remove") { dialog, which ->
                                     removeOne(item.stockId) { index ->
@@ -60,7 +60,8 @@ class CartAdapter(
                                 }
                                 .setNegativeButton("Cancel") { dialog, which ->
 
-                                }.show()
+                                }
+                                .show()
                     } else {
                         removeOne(item.stockId) {
                             updateQty(item)

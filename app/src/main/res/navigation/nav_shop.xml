@@ -58,9 +58,23 @@
         android:label="CheckoutFragment"
         tools:layout="@layout/fragment_checkout">
 
+        <action
+            android:id="@+id/action_checkout_fragment_to_payment_successful_fragment"
+            app:destination="@id/payment_successful_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
         <argument
             android:name="total"
             app:argType="string" />
     </fragment>
+
+    <fragment
+        android:id="@+id/payment_successful_fragment"
+        android:name="com.example.eshop.PaymentSuccessfulFragment"
+        android:label="PaymentSuccessful"
+        tools:layout="@layout/fragment_payment_successful" />
 
 </navigation>

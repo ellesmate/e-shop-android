@@ -34,7 +34,7 @@ object InjectorUtils {
     fun provideMainViewModelFactory(
             context: Context
     ) : MainViewModelFactory {
-        return MainViewModelFactory(getProductService(context))
+        return MainViewModelFactory(getLoginService(context), getProductService(context))
     }
 
     fun provideProductDetailViewModelFactory(

@@ -70,7 +70,7 @@ class ErrorInterceptor(private val cookieJar: ClearableCookieJar) : Interceptor 
 
         when (response.code()) {
             401, 403 -> {
-                cookieJar.clear()
+//                cookieJar.clear()
                 // TODO: goto login page
             }
         }
