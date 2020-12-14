@@ -49,9 +49,8 @@ class ProductAdapter :
             binding.productName.text = item.name
             binding.productPrice.text = item.price
 
-            val base_url = "https://e-shopdotnet.herokuapp.com"
             Picasso.get()
-                .load(base_url + item.images.first())
+                .load(item.images.first())
                 .into(binding.productImage)
 
             binding.root.setOnClickListener {

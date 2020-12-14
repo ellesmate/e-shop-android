@@ -35,10 +35,9 @@ class ImageAdapter :
         val binding: CarouselImageItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(image: String) {
-            val base_url = "https://e-shopdotnet.herokuapp.com"
 
             Picasso.get()
-                .load(base_url + image)
+                .load(image)
                 .placeholder(R.drawable.guitar_1)
                 .into(binding.image)
         }

@@ -73,9 +73,7 @@ class CartAdapter(
                     addOne(item.stockId) { updateQty(item) }
                 }
 
-                val base_url = "https://e-shopdotnet.herokuapp.com"
-
-                Picasso.get().load(base_url + item.images.first()).into(cartItemImage)
+                Picasso.get().load(item.images.first()).into(cartItemImage)
             }
         }
 
